@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SQLiteTool.h"
+#import "SQLiteQueueTool.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +17,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // 使用FMDatabase的数据库表创建
+    BOOL result = [[SQLiteTool shareInstance] createTable];
+    if (result) {
+        NSLog(@"表创建成功");
+    }else{
+        NSLog(@"表创建失败");
+    }
+    
+    // 使用FMDatabaseQueue的数据库表创建
+    BOOL resultQue = [[SQLiteQueueTool shareInstance] createTable];
+    if (resultQue) {
+        NSLog(@"队列表创建成功");
+    }else{
+        NSLog(@"队列表创建失败");
+    }
+    
     return YES;
 }
 
